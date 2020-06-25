@@ -1,25 +1,11 @@
-from typing import Union
-
-import geoip2.database
-import pytz
 import requests
+from django.contrib.gis import geoip2
 from django.http import HttpRequest
-from django.shortcuts import redirect
 from django.shortcuts import render
-from ipware import get_client_ip
-from ipware.ip import get_real_ip
+from django.template.defaultfilters import safe
 
-from apps import weather
-from apps.onboarding.utils.safeguards import safe
-from apps.weather.forms import CityForm
-from apps.weather.models import City
-
-# def get_user_ip(request: HttpRequest) -> Union[pytz.BaseTzInfo, None]:
-# ip = get_client_ip(request)[0]
-# ip_city = retrieve_ip(ip)
-# if not ip_city:
-#    return None
-# return pytz.timezone(ip_city)
+from weather.forms import CityForm
+from weather.models import City
 
 
 def index(request):
@@ -80,7 +66,7 @@ def index(request):
 
 def get_real_ip(request: HttpRequest):
     breakpoint()
-    #metod
+    # metod
     ip = get_real_ip(request)[0]
     ip_city = retrieve_ip(ip)
     appid = "b4be221bb02fa8a7be1d57407c585b5b"

@@ -1,7 +1,7 @@
 from django.urls import path
 
-from apps.weather import views
-from apps.weather.apps import WeatherConfig
+from weather import views
+from weather.apps import WeatherConfig
 
 app_name = WeatherConfig.label
 

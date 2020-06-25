@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django.forms import TextInput
 
-from apps.weather.models import City
+from weather.models import City
 
 
 class CityForm(ModelForm):

@@ -5,34 +5,19 @@ verify_ssl = true
 
 [dev-packages]
 black = "==19.10b0"
-httpie = "*"
 coverage = "*"
-pillow = "*"
-django-silk = "*"
-freezegun = "*"
 ipython = "*"
 isort = "*"
-pudb = "*"
+psycopg2 = "*"
 
 [packages]
-whitenoise = "*"
-boto3 = "*"
-drf-yasg = {extras = ["validation"],version = "*"}
-django-storages = "*"
-djangorestframework = "*"
 django = "*"
-dynaconf = {extras = ["yaml"],version = "*"}
 dj-database-url = "*"
-psycopg2-binary = "*"
-python-dotenv = "*"
-sentry-sdk = "*"
-django-crispy-forms = "*"
-delorean = "*"
-django-ipware = "*"
-celery = {extras = ["redis"],version = "*"}
+lxml = "*"
 requests = "*"
-uvicorn = "*"
-gunicorn = "*"
-awscli = "*"
+httpie = "*"
+delorean = "*"
+dynaconf = {extras = ["yaml"],version = "*"}
+pudb = "*"
 geopy = "*"
 geoip2 = "*"

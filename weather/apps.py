@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class WeatherConfig(AppConfig):
-    name = "apps.weather"
+    name = "weather.weather"
     label = "weather"
