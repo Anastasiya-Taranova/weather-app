@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>Прогноз погоды</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+  <h5 class="my-0 mr-md-auto font-weight-normal">Anastasiya Taranova</h5>
+  <nav class="my-2 my-md-0 mr-md-3">
+    <a class="p-2 text-dark" href="https://github.com/Anastasiya-Taranova?tab=repositories">Перейти на GitHub</a>
+  </nav>
+</div>
+
+<section class="section">
+
+<div class="container">
+
+    <div class="columns">
+        <div class="column is-offset-4 is-2">
+            <h2>Прогноз погоды:</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+        <label for="city">Город:</label>
+                {{ form.name }}
+                <input type="submit" name="send" value="Узнать" class="mt-2 btn btn-danger">
+{% if message %}
+                <div class="notification {{ message_class }}">{{ message }}</div>
+                {% endif %}
+    </form>
+        </div>
+        <div class="col-5 offset-2">
+
+            {% for info_ip in all_cities_ip %}
+           <h2>Информация о погоде в вашем городе:</h2>
+           <b>Город: </b> {{ info_ip.city }} <br>
+    <b> Температура: </b> {{ info_ip.temp }} <sup>0</sup><br>
+    <img src="http://openweathermap.org/img/w/{{ info_ip.icon }}.png" alt="Photo" class="img-thumbnail">
+
+{% endfor %}
+{% for info in all_info %}
+        <div class="col-5 offset-2">
+           <h2>Информация:</h2>
+           <b>Город: </b> {{ info.city }} <br>
+    <b> Температура: </b> {{ info.temp }} <sup>0</sup><br>
+    <img src="http://openweathermap.org/img/w/{{ info.icon }}.png" alt="Photo" class="img-thumbnail">
+
+
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+    </section>
+</body>
+</html>
