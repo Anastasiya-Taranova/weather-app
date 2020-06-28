@@ -36,8 +36,6 @@ INSTALLED_APPS_ORDERED = {
     30: "django.contrib.sessions",
     40: "django.contrib.messages",
     50: "django.contrib.staticfiles",
-    60: "rest_framework",
-    70: "django.contrib.sites",
     # --- my applications ---
     1000: "weather",
 }
@@ -92,7 +90,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = '/static/'
+STATIC_URL = '/assets/'
 
 STATICFILES_DIRS = [PROJECT_DIR / "static"]
 
