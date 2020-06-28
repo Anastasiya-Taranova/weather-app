@@ -45,15 +45,13 @@ INSTALLED_APPS_ORDERED = {
 INSTALLED_APPS = [app for _, app in sorted(INSTALLED_APPS_ORDERED.items())]
 
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django.contrib.sites.middleware.CurrentSiteMiddleware",
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = "project.urls"
@@ -61,7 +59,7 @@ ROOT_URLCONF = "project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [PROJECT_DIR / "templates",],
+        "DIRS": [PROJECT_DIR / "templates", ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -84,7 +82,6 @@ DATABASES = {
     "default": dj_database_url.parse(_db_url, conn_max_age=600)
 }
 
-
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
@@ -97,6 +94,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [PROJECT_DIR / "static"]
 
-
-
+STATIC_ROOT = REPO_DIR / ".static"

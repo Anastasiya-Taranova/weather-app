@@ -6,5 +6,5 @@ from weather.apps import WeatherConfig
 app_name = WeatherConfig.label
 
 urlpatterns = [
-    path("", views.index, name="weather"),
+    path("", views.index),
 ]

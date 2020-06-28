@@ -1,5 +1,3 @@
-import json
-
 from django.db import models as m
 
 
@@ -8,3 +6,6 @@ class City(m.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name_plural = 'cities'

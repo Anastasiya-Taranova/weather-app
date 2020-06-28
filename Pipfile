@@ -8,7 +8,6 @@ black = "==19.10b0"
 coverage = "*"
 ipython = "*"
 isort = "*"
-psycopg2 = "*"
 
 [packages]
 django = "*"
@@ -19,5 +18,6 @@ httpie = "*"
 delorean = "*"
 dynaconf = {extras = ["yaml"],version = "*"}
 pudb = "*"
+psycopg2-binary = "*"
 geopy = "*"
 geoip2 = "*"
