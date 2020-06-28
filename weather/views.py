@@ -1,19 +1,20 @@
 import requests
 from django.contrib.gis import geoip2
 from django.http import HttpRequest
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template.defaultfilters import safe
 
 from weather.forms import CityForm
 from weather.models import City
+
+appid = "b4be221bb02fa8a7be1d57407c585b5b"
+url = "http://api.openweathermap.org/data/2.5/find?q={}&units=metric&appid=" + appid
 
 
 def index(request):
     err_msg = ""
     message = ""
     message_class = ""
-    appid = "b4be221bb02fa8a7be1d57407c585b5b"
-    url = "http://api.openweathermap.org/data/2.5/find?q={}&units=metric&appid=" + appid
 
     if request.method == "POST":
         form = CityForm(request.POST)
@@ -65,32 +66,20 @@ def index(request):
 
 
 def get_real_ip(request: HttpRequest):
-    breakpoint()
-    # metod
-    ip = get_real_ip(request)[0]
-    ip_city = retrieve_ip(ip)
-    appid = "b4be221bb02fa8a7be1d57407c585b5b"
-    url = "http://api.openweathermap.org/data/2.5/find?q={}&units=metric&appid=" + appid
-
     reader = geoip2.database.Reader("src/GeoLite2-City.mmdb")
-    if ip_city is not None:
-        response = reader.city(ip_city)
+    city = retrieve_ip()
+    if city is not None:
+        response = reader.city(city)
         return response
-    else:
-        response = reader.city("178.120.37.5")
-        return response
-
+    response = reader.city("178.120.37.5")
     all_cities_ip = []
-    city_name_ip = response.city.name
-
-    res = requests.get(url.format(city_name_ip)).json()
+    r = requests.get(url.format(response)).json()
     city_info_ip = {
-        "city": city_name_ip,
-        "temp": res["list"][0]["main"]["temp"],
-        "icon": res["list"][0]["weather"][0]["icon"],
+        "city": response,
+        "temp": r["list"][0]["main"]["temp"],
+        "icon": r["list"][0]["weather"][0]["icon"],
     }
     all_cities_ip.append(city_info_ip)
-
     context = {"all_cities_ip": all_cities_ip}
     return render(request, "weather/index.html", context)
 
@@ -99,8 +88,14 @@ def get_real_ip(request: HttpRequest):
 def retrieve_ip(ip: str):
     resp = requests.get(f"http://ip-api.com/json/{ip}")
     payload = resp.json()
-    ip_city = payload.get("city")
+    city = payload.get("city")
     if resp.status_code != 200:
         return None
     else:
-        return ip_city
+        return city
+
+def delete_city(request, city_name):
+    assert request
+    city = City.objects.get(name=city_name)
+    city.delete()
+    return redirect('home')

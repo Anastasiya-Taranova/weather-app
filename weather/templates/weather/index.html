@@ -19,42 +19,49 @@
 <section class="section">
 
 <div class="container">
-
     <div class="columns">
         <div class="column is-offset-4 is-2">
             <h2>Прогноз погоды:</h2>
             <form action="" method="post">
                 {% csrf_token %}
-        <label for="city">Город:</label>
+            <label for="city">Город:</label>
                 {{ form.name }}
                 <input type="submit" name="send" value="Узнать" class="mt-2 btn btn-danger">
-{% if message %}
+                {% if message %}
                 <div class="notification {{ message_class }}">{{ message }}</div>
                 {% endif %}
-    </form>
-        </div>
-        <div class="col-5 offset-2">
+                 </form>
+                 </div>
 
-            {% for info_ip in all_cities_ip %}
-           <h2>Информация о погоде в вашем городе:</h2>
-           <b>Город: </b> {{ info_ip.city }} <br>
-    <b> Температура: </b> {{ info_ip.temp }} <sup>0</sup><br>
-    <img src="http://openweathermap.org/img/w/{{ info_ip.icon }}.png" alt="Photo" class="img-thumbnail">
+                <div class="col-5 offset-2">
+                <h2>Информация о погоде в вашем городе:</h2>
+                    <form action="" method="get">
+                {% for city in all_cities_ip %}
+                <b>Город: </b> {{ city.city }} <br>
+                  <b> Температура: </b> {{ city.temp }} <sup>0</sup><br>
+                <img src="http://openweathermap.org/img/w/{{ city.icon }}.png" alt="Photo" class="img-thumbnail">
+                </div>
 
-{% endfor %}
-{% for info in all_info %}
+                {% endfor %}
+                {% for info in all_info %}
         <div class="col-5 offset-2">
            <h2>Информация:</h2>
            <b>Город: </b> {{ info.city }} <br>
     <b> Температура: </b> {{ info.temp }} <sup>0</sup><br>
     <img src="http://openweathermap.org/img/w/{{ info.icon }}.png" alt="Photo" class="img-thumbnail">
-
-
-
+            <div class="media-right">
+    <a href="{% url 'delete_city' city_info.city %}">
+        <button class="delete"></button>
+    </a>
+</div>
         </div>
         {% endfor %}
+
+
+
     </div>
 </div>
+    </div>
     </section>
 </body>
 </html>
