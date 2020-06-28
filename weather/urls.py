@@ -8,3 +8,4 @@ app_name = WeatherConfig.label
 urlpatterns = [
     path("", views.index),
 ]
+

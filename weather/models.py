@@ -9,3 +9,4 @@ class City(m.Model):
 
     class Meta:
         verbose_name_plural = 'cities'
+
