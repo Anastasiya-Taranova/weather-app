@@ -22,6 +22,7 @@ development:
 
 heroku:
   ALLOWED_HOSTS:
+    - wea-app.herokuapp.com
     - 127.0.0.1
     - localhost
   CELERY_BEAT_INVITATION: 900
